@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Built-By: IN-LL-018
+Build-Jdk: 11.0.2
+Implementation-Title: SpringBootJwtAuthentication
+Implementation-Version: 0.0.1
+Implementation-Vendor-Id: com.adaming.crowdBackend
+Implementation-URL: https://projects.spring.io/spring-boot/#/spring-boot
+ -starter-parent/SpringBootJwtAuthentication
+Created-By: Maven Integration for Eclipse
+

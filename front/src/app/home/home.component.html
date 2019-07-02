@@ -1,0 +1,36 @@
+<!--<div *ngIf="info.token; else loggedOut">
+  <h5 class="text-primary">Your Information</h5>
+  <p>
+    <strong>Username:</strong> {{info.username}}<br/>
+    <strong>Roles:</strong> {{info.authorities}}<br />
+    <strong>Token:</strong> {{info.token}}.
+  </p>
+  <button class="btn btn-secondary" (click)="logout()">Logout</button>
+</div>
+
+<ng-template #loggedOut>
+  Please <a routerLink="/auth/login">login here</a>.
+</ng-template>-->
+
+
+
+<div class="container">
+  <h4>C R O W , qu'est-ce que c'est ?</h4>
+  <p>C R O W est une plate-forme de financement participatif (CROWdfunding).<br/>
+  Les plus belles idees prennent vie avec C R O W, grace a vous !
+  </p>
+
+  <h4>Les derniers projets</h4>
+  <div class="card-deck">
+    <!-- Fragment correspondant à une carte résumant le projet -->
+    <div *ngFor="let project of projects" class="card cw-25">
+      <a routerLink="/project/{{project.id}}"><img src="{{project.thumbnailPath}}" class="card-img-top" alt="some alt text" style="max-width: 100%; height: 200px; object-fit:cover;"></a>
+      <div class="card-body">
+        <a routerLink="/project/{{project.id}}"><h5 class="card-title">{{project.title}}</h5></a>
+        <p class="card-text">{{project.pitch}}</p>
+        <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
+      </div>
+    </div>
+  </div>
+  <p class="text-right"><a routerLink="/projects">...voir tous les projets</a></p>
+</div>

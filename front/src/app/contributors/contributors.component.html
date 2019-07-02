@@ -1,0 +1,59 @@
+<div *ngIf="data.authority === 'admin'" class="container">
+
+  <h4>Top des donateurs</h4>
+  <div *ngIf="categories" class="row">
+    <div class="col-md-9">
+      <div class="mb-2" *ngFor="let c of contributors">
+        <app-contributor-donations-details [contributor]="c" [maxAmount]="maxAmount"></app-contributor-donations-details>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <h5>Classer par :</h5>
+      <div class="d-flex flex-wrap justify-content-left">
+          <button class="btn p-2 m-1" style="background-color: grey" (click)="getContributors()">Total</button>
+          <button *ngFor="let c of categories" class="btn p-2 m-1"
+          [style.background-color]="c.color" (click)="getContributorsForCategory(c.id)">{{c.name}}</button>
+      </div>
+    </div>
+  </div>
+
+  <br/>
+  <h4>Tous les donateurs</h4>
+  <ul class="d-flex flex-wrap list-group list-group-horizontal-md">
+    <li class="list-group-item" *ngFor="let c of contributorsAlphabetically"><a routerLink="/profile/{{c.nickname}}">{{c.nickname}}</a></li>
+  </ul>
+  
+</div>
+
+<!--<div id="contrib1" class="mb-2">
+    <span>Contributeur 1 - 8570&euro; donnes</span>
+    <div class="progress">
+      <div class="progress-bar bg-danger" role="progressbar" style="width: 35%">3000&euro;</div>
+      <div class="progress-bar bg-success" role="progressbar" style="width: 35%">3000&euro;</div>
+      <div class="progress-bar bg-warning" role="progressbar" style="width: 30%">2570&euro;</div>
+    </div>
+  </div>
+  <div id="contrib2" class="mb-2">
+    <span>Contributeur 2 - 5500&euro; donnes</span>
+    <div class="progress">
+      <div class="progress-bar bg-danger" role="progressbar" style="width: 29.2%" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100">2500&euro;</div>
+      <div class="progress-bar bg-success" role="progressbar" style="width: 17.5%" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100">1500&euro;</div>
+      <div class="progress-bar bg-warning" role="progressbar" style="width: 17.5%" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">1500&euro;</div>
+    </div>
+  </div>
+  <div id="contrib3" class="mb-2">
+    <span>Contributeur 3 - 4800&euro; donnes</span>
+    <div class="progress" >
+      <div class="progress-bar bg-danger" role="progressbar" style="width: 9.33%" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100">800&euro;</div>
+      <div class="progress-bar bg-success" role="progressbar" style="width: 11.66%" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100">1000&euro;</div>
+      <div class="progress-bar bg-warning" role="progressbar" style="width: 35%" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">3000&euro;</div>
+    </div>
+  </div>
+-->
+<!--
+Bon, comment je fais ces contributeurs ?
+Ils ont un nom, mais aussi une liste de dons
+Chaque don est lié à un projet et a un montant spécifique
+Sur le backend on devra donc avoir des fonctions spécifiques pour retrouver les dons d'un contributeur
+(genre les dons de telle catégorie / sur tel projet, la somme des dons sur un projet / une catégorie)
+-->

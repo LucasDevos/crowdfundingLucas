@@ -1,0 +1,61 @@
+<!--<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">LOGO</a>
+    </div>
+    <ul class="nav navbar-nav" routerLinkActive="active">
+      <li class="nav-item"><a class="nav-link" routerLink="home">Home</a></li>
+      <li *ngIf="authority === 'user'" class="nav-item">
+        <a class="nav-link" routerLink="user">User Content</a>
+      </li>
+      <li *ngIf="authority === 'admin'" class="nav-item">
+        <a class="nav-link" routerLink="admin">Admin Content</a>
+      </li>
+      <li *ngIf="authority === 'pm'" class="nav-item">
+        <a class="nav-link" routerLink="pm">PM Content</a>
+      </li>
+      <li *ngIf="!authority" class="nav-item">
+        <a class="nav-link" routerLink="auth/login">Login</a>
+      </li>
+    </ul>
+  </div>
+</nav>-->
+
+
+<div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
+  
+  <!--logo-->
+  <a routerLink="/home"><i class="fas fa-crow mr-2"></i></a>
+  <h5 class="my-0 mr-md-auto font-weight-normal"><a routerLink="/home">C R O W</a></h5>
+
+  <!--navbar-->
+  <nav class="my-2 my-md-0 mr-md-3">
+    <!--<a class="p-2 text-dark" routerLink="/home">Accueil</a>-->
+    <a class="p-2 text-dark" routerLink="/projects">Projets</a>
+    <a class="p-2 text-dark" routerLink="/new-project">J'ai un projet !</a>
+    <a *ngIf="authority === 'admin'" class="p-2 text-dark font-weight-bold" routerLink="/contributors">Contributeurs</a>
+    <a *ngIf="authority === 'admin' || authority === 'pm'" class="p-2 text-dark font-weight-bold" routerLink="/donations">Donations</a>
+    <a *ngIf="authority === 'admin'" class="p-2 text-dark font-weight-bold" routerLink="/categories">Categories</a>
+    <a *ngIf="!user" class="btn btn-primary" routerLink="/auth/login">Connexion</a>
+    <button *ngIf="user" class="btn btn-secondary ml-2" (click)="logout()">Deconnexion</button>
+  </nav>
+
+  <!--user section (profile picture, login / logout)-->
+  <div *ngIf="authority === 'user' || authority === 'pm' || authority === 'admin'" class="row">
+    <div *ngIf="user" class="profile-header-container">  
+      <a routerLink="/profile/{{user.nickname}}"> 
+      <div class="profile-header-img">
+        
+          <img [ngClass]="(authority === 'admin') ? 'img-circle-admin' : (authority === 'pm') ? 'img-circle-pm' : 'img-circle'"
+          title="{{user.nickname}}" src="{{user.avatar}}" />
+        
+        <!-- badge -->
+        <!--<div class="rank-label-container">
+            <span class="label label-default rank-label">100 puntos</span>
+        </div>-->
+      </div>
+      </a>
+    </div> 
+  </div>
+  <!--<a class="btn btn-outline-primary" href="#">Se connecter</a>-->
+</div>

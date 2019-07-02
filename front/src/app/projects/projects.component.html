@@ -1,0 +1,65 @@
+<div class="container">
+  <h4>Les projets</h4>
+  <div class="row my-4">
+    <div class="col-md-4">
+      <div>Filtrer</div>
+      <button class="btn btn-dark p-2 m-1" (click)="toggleField('id')">
+        # {{activeField == "id" ? (toggleState ? "&darr;" : "&uarr;") : ""}}</button>
+      <button class="btn btn-dark p-2 m-1" (click)="toggleField('title')">
+        Titre {{activeField == "title" ? (toggleState ? "&darr;" : "&uarr;") : ""}}</button>
+      <button class="btn btn-dark p-2 m-1" (click)="toggleField('creator')">
+        Createur {{activeField == "creator" ? (toggleState ? "&darr;" : "&uarr;") : ""}}</button>
+      <button class="btn btn-dark p-2 m-1" (click)="toggleField('submissionDate')">
+        Date de soumission {{activeField == "submissionDate" ? (toggleState ? "&darr;" : "&uarr;") : ""}}</button>
+      <button class="btn btn-dark p-2 m-1" (click)="toggleField('endDate')">
+        Date de fin {{activeField == "endDate" ? (toggleState ? "&darr;" : "&uarr;") : ""}}</button>
+      <button class="btn btn-dark p-2 m-1" (click)="toggleField('donationGoal')">
+        Objectif {{activeField == "donationGoal" ? (toggleState ? "&darr;" : "&uarr;") : ""}}</button>
+    </div>
+    <div class="col-md-4">
+      <div>Categorie</div>
+      <div class="d-flex flex-wrap justify-content-left">
+          <button class="btn p-2 m-1" style="background-color: grey" (click)="categoryNumber = 9999; search();">Toutes</button>
+          <button *ngFor="let c of categories" class="btn p-2 m-1"
+          [style.background-color]="c.color" (click)="categoryNumber = c.id; search();">{{c.name}}</button>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div>Rechercher</div>
+      <div class="input-group md-form form-sm form-2 pl-0">
+        <input class="form-control my-0 py-1 red-border" #searchBar type="text" placeholder="Search" aria-label="Search">
+        <div (click)="search()" class="input-group-append">
+          <span class="input-group-text red lighten-3" id="basic-text1">
+            <i class="fas fa-search text-grey" aria-hidden="true"></i>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="projects" class="card-deck">
+
+    <!-- Fragment correspondant à une carte résumant le projet -->
+    <div *ngFor="let project of projects" class="card mb-4 cw-25">
+      <a routerLink="/project/{{project.id}}"><img src="{{project.thumbnailPath}}" class="card-img-top" alt="some alt text" style="max-width: 100%; height: 100px; object-fit:cover;"></a>
+      <div class="card-body">
+        <a routerLink="/project/{{project.id}}"><h5 class="card-title">{{project.title}}</h5></a>
+        <p class="card-text"><small>{{project.pitch}}</small></p>
+      </div>
+      <div class="card-footer">
+        <p *ngIf="activeField=='creator' || activeField=='submissionDate'">
+          <small class="card-text text-muted">
+            Soumis par <a routerLink="/profile/{{project.creator.nickname}}">{{project.creator.nickname}}</a> le {{project.submissionDate | date:'d MMM y - hh:mm'}}
+          </small>
+        </p>
+        <p *ngIf="activeField=='endDate' || activeField=='donationGoal'">
+          <small class="card-text text-muted">Objectif : {{project.donationGoal}}&euro; (jusqu'au {{project.endDate | date:'d MMM y'}})</small>
+        </p>
+        <a *ngIf="data.authority === 'admin' || (user != null && user.id === project.creator.id)"
+        routerLink="/update-project/{{project.id}}" class="btn btn-info m-1">Modifier</a>
+        <button *ngIf="data.authority === 'admin' || (user != null && user.id === project.creator.id)"
+        (click)="deleteProject(project.id)" class="btn btn-danger m-1">Supprimer</button>
+      </div>
+    </div>
+
+  </div>
+</div>

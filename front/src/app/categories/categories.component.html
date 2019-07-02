@@ -1,0 +1,35 @@
+<div *ngIf="data.authority === 'admin'" class="container">
+  <div class="row">
+    <div class="col-md-8">
+      <h4>Categories</h4>
+      <div *ngFor="let c of categories">
+          <button class="btn p-2 m-1" [style.background-color]="c.color">{{c.name}}</button>
+          <p>{{c.description}}</p>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <h4>Ajouter une categorie</h4>
+      <!--<form [formGroup]="colorForm" style="width:100px;">
+        <div>
+          <label for="color">Couleur</label>
+          <input class="form-control" type="color"/>
+        </div>
+      </form>-->
+      <form [formGroup]="categoryForm" (ngSubmit)="createCategorie()">
+        <div class="form-group">
+          <label for="name">Nom</label>
+          <input formControlName="name" class="form-control" type="text" style="width:50%;" />
+        </div>
+        <div class="form-group">
+          <label for="description">Description</label>
+          <input formControlName="description" class="form-control" type="text" />
+        </div>
+        <div class="form-group">
+          <label for="color">Couleur</label>
+          <input formControlName="color" class="form-control" type="color" style="width:100px;"/>
+        </div>
+        <button class="btn btn-primary">Creer la categorie</button>
+      </form>
+    </div>
+  </div>
+</div>

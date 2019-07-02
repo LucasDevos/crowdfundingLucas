@@ -1,0 +1,7 @@
+<span>{{contributor.nickname}} - {{total}}&euro; donnes</span>
+<div class="progress" >
+  <!--<p *ngFor="let t of totalPerCategories">{{t}}</p>-->
+  <div *ngFor="let t of totalPerCategories; let i = index"
+  class="progress-bar" [style.width]="getWidth(t)" [style.background-color]="getColor(i)"
+  role="progressbar" >{{t}}&euro;</div>
+</div>

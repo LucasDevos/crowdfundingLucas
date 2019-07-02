@@ -1,0 +1,14 @@
+<div *ngIf="update" class="container">
+  <h4>{{project.title}} - Ajouter une nouvelle</h4>
+  <form [formGroup]="updateForm" (ngSubmit)="saveUpdate()">
+    <div class="form-group">
+      <label for="title">Titre</label>
+      <input formControlName="title" class="form-control" type="text" id="title"/>
+    </div>
+    <div class="form-group">
+      <label for="updateText">Texte</label>
+      <textarea formControlName="description" class="form-control" id="updateText" cols="40" rows="5"></textarea>
+    </div>
+    <button class="btn btn-success">Ajouter la nouvelle</button>
+  </form>
+</div>

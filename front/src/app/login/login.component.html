@@ -1,0 +1,43 @@
+<div class="container">
+  <div *ngIf="isLoggedIn; else loggedOut">
+    Connecte en tant que : {{getRoleName(roles)}}.
+  </div>
+  
+  <ng-template #loggedOut>
+    <div class="row col-sm-6 mx-auto mt-5" style="max-width:260px;">
+      <h4>Se connecter</h4>
+      <form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
+        <div class="form-group">
+          <label for="username">Nom d'utilisateur</label>
+          <input type="text" class="form-control" name="username" [(ngModel)]="form.username" #username="ngModel"
+            required />
+          <div *ngIf="f.submitted && username.invalid">
+            <div *ngIf="username.errors.required">Un nom d'utilisateur est requis</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="password">Mot de passe</label>
+          <input type="password" class="form-control" name="password" [(ngModel)]="form.password" #password="ngModel"
+            required minlength="6" />
+          <div *ngIf="f.submitted && password.invalid">
+            <div *ngIf="password.errors.required">Un mot de passe est requis</div>
+            <div *ngIf="password.errors.minlength">Le mot de passe doit contenir au moins 6 caracteres</div>
+          </div>
+        </div>
+        <div class="form-group m-auto" style="width:120px;">
+          <button class="btn btn-primary m-auto">Se connecter</button>
+          <div *ngIf="f.submitted && isLoginFailed" class="alert alert-danger">
+            Erreur d'authentification: {{errorMessage}}
+          </div>
+        </div>
+      </form>
+      <hr />
+      <div class="mt-5" style="width:100%">
+        <p class="text-center">Vous n'avez pas de compte ?</p>
+      </div>
+      <div class="m-auto">
+        <a href="signup" class="btn btn-success">S'inscrire</a>
+      </div>
+    </div>
+  </ng-template>
+</div>

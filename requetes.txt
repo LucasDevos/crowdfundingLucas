@@ -1,0 +1,59 @@
+Liste des requêtes à tester (en plus des requêtes déjà présentes sur le projet de base)
+
+http://localhost:8080/crow/
+
+CATEGORY
+http://localhost:8080/crow/categories
+http://localhost:8080/crow/categories/save		(POST)
+
+CONTRIBUTOR (note: le POST est géré par le signup)
+http://localhost:8080/crow/contributors
+http://localhost:8080/crow/contributors/orderedByNickname
+http://localhost:8080/crow/contributors/orderedByDonations
+http://localhost:8080/crow/contributors/orderedByDonations/cat={categoryId}
+http://localhost:8080/crow/contributors/orderedByDonations/proj={projectId}
+http://localhost:8080/crow/contributors/user={name}
+http://localhost:8080/crow/contributors/id={id}
+http://localhost:8080/crow/contributors/id={id}/cat={categoryId}
+http://localhost:8080/crow/contributors/id={id}/allCategories
+http://localhost:8080/crow/contributors/maxAmount
+
+DONATION
+http://localhost:8080/crow/donations
+http://localhost:8080/crow/donations/id_asc
+http://localhost:8080/crow/donations/id_desc
+http://localhost:8080/crow/donations/dateTime_asc
+http://localhost:8080/crow/donations/dateTime_desc
+http://localhost:8080/crow/donations/amount_asc
+http://localhost:8080/crow/donations/amount_desc
+http://localhost:8080/crow/donations/contributor_asc
+http://localhost:8080/crow/donations/contributor_desc
+http://localhost:8080/crow/donations/project_asc
+http://localhost:8080/crow/donations/project_desc
+http://localhost:8080/crow/donations/donationType_asc
+http://localhost:8080/crow/donations/donationType_desc
+http://localhost:8080/crow/donations/types
+http://localhost:8080/crow/donations/save		(POST)
+
+PROJECT
+http://localhost:8080/crow/projects
+http://localhost:8080/crow/projects/all
+http://localhost:8080/crow/projects/{id}
+http://localhost:8080/crow/projects/search={str}/cat={catId}/field={field}/descending={isDesc}
+http://localhost:8080/crow/projects/user={id}
+http://localhost:8080/crow/projects/backed/user={id}
+http://localhost:8080/crow/projects/delete={id}
+http://localhost:8080/crow/projects/saveProject		(POST)
+http://localhost:8080/crow/projects/updates/save/projId={projId}	(POST)
+
+
+
+
+
+
+
+
+
+
+
+

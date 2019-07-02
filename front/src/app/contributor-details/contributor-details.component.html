@@ -1,0 +1,17 @@
+<div class="container" *ngIf="user">
+  <div class="profile-header-img m-auto" style="max-width: 96px;">
+    <img [ngClass]="(authority === 'admin') ? 'img-circle-admin' : (authority === 'pm') ? 'img-circle-pm' : 'img-circle'"
+    title="{{user.nickname}}" src="{{user.avatar}}" />
+    <h3 class="text-center">{{user.nickname}}</h3>
+  </div>
+  
+  
+  <h4>Ses projets</h4>
+  <ul>
+    <li *ngFor="let p of projects"><a routerLink="/project/{{p.id}}">{{p.title}}</a></li>
+  </ul>
+  <h4>Projets soutenus</h4>
+  <ul>
+    <li *ngFor="let bp of backedProjects"><a routerLink="/project/{{bp.id}}">{{bp.title}}</a></li>
+  </ul>
+</div>

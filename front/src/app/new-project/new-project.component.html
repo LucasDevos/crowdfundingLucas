@@ -1,0 +1,125 @@
+<div *ngIf="loaded" class="container">
+
+  <h3 class="text-center mt-5">{{projectId == 0 ? "Nouveau projet" : "Modifier projet"}}</h3>
+
+  <div *ngIf="user==null; else newProject">
+    <p class="text-center">Veuillez <a routerLink="/auth/login">vous connecter</a> pour créer un nouveau projet</p>
+  </div>
+  
+  <ng-template #newProject>
+  <div *ngIf="projectId != 0" class="row mt-5">
+    <div class="col-mt-10">
+        <p class="text-muted">De nombreux champs ne sont pas modifiables apres la creation du projet pour eviter les abus.<br/>
+        Vous pouvez toutefois <strong>ajouter une Nouvelle</strong> afin de tenir tout le monde informe des derniers changements !</p>
+    </div>
+    <div class="col-mt-2">
+      <div class="mx-5 mt-1">
+        <button class="btn btn-success" routerLink="/project/add-update/{{projectId}}">Ajouter une nouvelle</button>
+      </div>
+    </div>
+  </div>
+
+  <form [formGroup]="projectForm" (ngSubmit)="saveProject()">
+
+    <h4 class="mt-5">Informations de base</h4>
+    <div class="card-group">
+      
+      <div class="card">
+        <div class="card-body">
+          <div class="form-group">
+            <label for="title">Titre</label>
+            <small class="text-muted"> - Le titre de votre projet</small>
+            <input formControlName="title" class="form-control" type="text" [attr.readOnly]="projectId == 0 ? null : true"/>
+          </div>
+          <div class="form-group">
+            <label for="title">Pitch</label>
+            <small class="text-muted"> - Resumez votre projet en 1 ligne !</small>
+            <input formControlName="pitch" class="form-control" type="text"/>
+          </div>
+          <div class="form-group">
+            <label for="title">Categorie</label>
+            <small class="text-muted"> - Veuillez choisir une categorie</small>
+            <div class="input-group mb-3">
+              <!--<div class="input-group-prepend">
+                <label class="input-group-text" for="inputGroupSelect01">Options</label>
+              </div>-->
+              <select formControlName="category" class="custom-select" id="inputGroupSelect01">
+                <option selected>Choisir...</option>
+                <option *ngFor="let c of categories" [ngValue]="c">{{c.name}}</option>
+                <!--IMPORTANT : on utilise [ngValue] plutôt que value car ce dernier ne stocke que des strings-->
+              </select>
+            </div>
+          </div>
+          
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-body">
+          <div class="form-group mb-0">
+            <label for="title">Image</label>
+            <small class="text-muted"> - Url de l'image representant votre projet (affichee ci-dessous)</small>
+            <input formControlName="thumbnailPath" class="form-control" type="text" (change)="updatePicture($event)"/>
+          </div>
+        </div>
+        <div class="mx-3 mb-3">
+          <img src="{{pictureUrl}}" style="height:200px; object-fit: cover;" class="card-img" alt="...">
+        </div>
+      </div>
+
+    </div>
+
+    <h4 class="mt-5">Objectif</h4>
+
+    <div class="card-group">
+      <div class="card">
+        <div class="card-body">
+            <div class="form-group">
+              <label for="title">Montant desire</label>
+              <small class="text-muted"> - De quel somme avez-vos besoin pour votre projet ? (en &euro;)</small>
+              <input formControlName="donationGoal" class="form-control" [attr.readOnly]="projectId == 0 ? null : true"
+              value="1.99" type="number" step="0.01" min="1.0" max ="99999" />
+            </div>
+        </div>
+      </div>
+      <div class="card">
+          <div class="card-body">
+              <div class="form-group">
+                <label for="title">Fin du financement</label>
+                <small class="text-muted"> - A quelle date le financement devrait s'arreter ?</small>
+                <input formControlName="endDate" class="form-control" type="date"/>
+              </div>
+          </div>
+        </div>
+    </div>
+
+
+    <h4 class="mt-5">Description</h4>
+    <div class="form-group">
+      <label for="title">Description</label>
+      <small class="text-muted"> - Detaillez votre projet</small>
+      <!--<input class="form-control text-wrap align-top" type="text" style="height:200px"/>-->
+      <textarea [attr.readOnly]="projectId == 0 ? null : true" formControlName="description"
+      class="form-control" name="description" cols="40" rows="5"></textarea>
+    </div>
+
+
+    <!--<div class="form-group">
+      <label for="title">Vous êtes qui ?</label>
+      <small class="text-muted"> - (ce champ sera supprimé quand on aura un système de login)</small>
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <label class="input-group-text" for="inputGroupContributor">Je suis : </label>
+        </div>
+        <select formControlName="creator" class="custom-select" id="inputGroupContributor">
+          <option *ngFor="let ct of contributors" [ngValue]="ct">{{ct.nickname}}</option>
+        </select>
+      </div>
+    </div>-->
+
+    <button class="btn btn-success">{{projectId == 0 ? "Soumettre mon projet !" : "Mettre à jour le projet"}}</button>
+    
+  </form>
+  </ng-template>
+
+</div>

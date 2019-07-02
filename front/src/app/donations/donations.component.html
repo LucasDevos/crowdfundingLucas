@@ -1,0 +1,33 @@
+<!--<ul>
+  <li *ngFor="let d of donations">{{d.amount}}&euro;, {{d.contributor.nickname}}, {{d.project.title}}, {{d.dateTime}}</li>
+</ul>-->
+<div *ngIf="data.authority === 'admin' || data.authority === 'pm'" class="container">
+  <table class="table table-sm table-hover">
+    <thead>
+      <tr>
+        <th scope="col"><button class="btn btn-dark" (click)="toggleField('id')">
+          # {{activeField == "id" ? (toggleState ? "&darr;" : "&uarr;") : ""}}</button></th>
+        <th scope="col"><button class="btn btn-dark" (click)="toggleField('dateTime')">
+          Date {{activeField == "dateTime" ? (toggleState ? "&darr;" : "&uarr;") : ""}}</button></th>
+        <th scope="col"><button class="btn btn-dark" (click)="toggleField('amount')">
+          Amount {{activeField == "amount" ? (toggleState ? "&darr;" : "&uarr;") : ""}}</button></th>
+        <th scope="col"><button class="btn btn-dark" (click)="toggleField('contributor')">
+          From {{activeField == "contributor" ? (toggleState ? "&darr;" : "&uarr;") : ""}}</button></th>
+        <th scope="col"><button class="btn btn-dark" (click)="toggleField('project')">
+          Project {{activeField == "project" ? (toggleState ? "&darr;" : "&uarr;") : ""}}</button></th>
+        <th scope="col"><button class="btn btn-dark" (click)="toggleField('donationType')">
+          Type {{activeField == "donationType" ? (toggleState ? "&darr;" : "&uarr;") : ""}}</button></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let d of donations">
+        <th scope="row">{{d.id}}</th>
+        <td>{{d.dateTime | date:'d MMM y - hh:mm'}}</td>
+        <td>{{d.amount}}</td>
+        <td><a routerLink="/profile/{{d.contributor.nickname}}">{{d.contributor.nickname}}</a></td>
+        <td><a routerLink="/project/{{d.project.id}}">{{d.project.title}}</a></td>
+        <td>{{d.donationType}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
